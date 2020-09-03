@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Category;
+use App\Http\Resources\CategoryCollection;
 use App\User;
 use App\Writer;
 use Illuminate\Http\Request;
@@ -94,5 +96,11 @@ class UserController extends Controller
             // something went wrong whilst attempting to encode the token
             return response()->json(["message" => "No se pudo cerrar la sesión."], 500);
         }
+    }
+
+    public function categories()
+    {
+        $user = Auth::user();
+        return response()->json($user->categories, 200);
     }
 }
